@@ -13,6 +13,11 @@ use MAC\Models\Viagem\Controllers\ViagemController;
 
 Route::post('auth/login', [AuthController::class, 'login'])->name('login')->middleware(['web', 'guest']);
 
+Route::middleware(['web', 'guest'])->group(function () {
+    Route::post('auth/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot-password')->middleware('throttle:3,1');
+    Route::post('auth/reset-password', [AuthController::class, 'resetPassword'])->name('auth.reset-password')->middleware('throttle:10,1');
+});
+
 Route::prefix('auth')->name('auth.')->middleware(['web', 'auth:sanctum'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('me', [AuthController::class, 'me'])->name('me');

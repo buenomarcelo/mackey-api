@@ -72,6 +72,26 @@ Fluxo:
 
 `config/cors.php` tem `supports_credentials: true` e `allowed_origins` restrito a `FRONTEND_URL` (obrigatório com credentials — não pode ser `*`).
 
+### Esqueci minha senha (OTP por e-mail)
+
+- `POST /api/auth/forgot-password` — `{ email }` → gera um código de 6 dígitos, válido por 15 min, e envia por e-mail. Resposta sempre genérica (não revela se o e-mail existe). Throttle: 3/min.
+- `POST /api/auth/reset-password` — `{ email, code, password, password_confirmation }` → valida o código (máx. 5 tentativas erradas antes de invalidar) e redefine a senha. Throttle: 10/min.
+
+O código fica hasheado em `password_reset_otps`; cada nova solicitação invalida o código anterior daquele e-mail.
+
+**E-mail**: `MAIL_MAILER=log` por padrão — o e-mail é escrito em `storage/logs/laravel.log` em vez de enviado de verdade (bom pra dev). Para enviar de verdade, troque no `.env`:
+
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.seudominio.com
+MAIL_PORT=587
+MAIL_USERNAME=...
+MAIL_PASSWORD=...
+MAIL_ENCRYPTION=tls
+```
+
+Nenhuma mudança de código é necessária — o `Mail::to()->send()` já usa o driver configurado.
+
 ## Debug (Xdebug + VSCode)
 
 Xdebug já vem instalado no container `php`, desligado por padrão (`xdebug.mode=debug` + `xdebug.start_with_request=trigger` — só conecta quando explicitamente disparado, pra não poluir o output de `artisan`/`composer` a cada comando).
