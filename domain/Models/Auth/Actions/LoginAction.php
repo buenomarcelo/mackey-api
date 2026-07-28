@@ -11,7 +11,7 @@ final class LoginAction
 {
     public function handle(Request $request, string $email, string $password): User
     {
-        if (! Auth::guard('web')->attempt(['email' => $email, 'password' => $password])) {
+        if (! Auth::guard('web')->attempt(['email' => $email, 'password' => $password, 'ativo' => true])) {
             throw ValidationException::withMessages([
                 'email' => [__('auth.failed')],
             ]);

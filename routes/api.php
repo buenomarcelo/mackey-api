@@ -9,6 +9,7 @@ use MAC\Models\ContaPagarMotorista\Controllers\ContaPagarMotoristaController;
 use MAC\Models\Dashboard\Controllers\DashboardController;
 use MAC\Models\DespesaCaminhao\Controllers\DespesaCaminhaoController;
 use MAC\Models\Motorista\Controllers\MotoristaController;
+use MAC\Models\User\Controllers\UserController;
 use MAC\Models\Viagem\Controllers\ViagemController;
 
 Route::post('auth/login', [AuthController::class, 'login'])->name('login')->middleware(['web', 'guest']);
@@ -41,4 +42,8 @@ Route::middleware(['web', 'auth:sanctum'])->group(function () {
 
     Route::get('balancete', [BalanceteController::class, 'index'])->name('balancete');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+Route::middleware(['web', 'auth:sanctum', 'admin'])->group(function () {
+    Route::apiResource('usuarios', UserController::class)->parameters(['usuarios' => 'user']);
 });
