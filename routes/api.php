@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use MAC\Models\Abastecimento\Controllers\AbastecimentoController;
 use MAC\Models\Auth\Controllers\AuthController;
+use MAC\Models\Balancete\Controllers\BalanceteController;
 use MAC\Models\Caminhao\Controllers\CaminhaoController;
 use MAC\Models\ContaPagarMotorista\Controllers\ContaPagarMotoristaController;
+use MAC\Models\Dashboard\Controllers\DashboardController;
 use MAC\Models\DespesaCaminhao\Controllers\DespesaCaminhaoController;
 use MAC\Models\Motorista\Controllers\MotoristaController;
 use MAC\Models\Viagem\Controllers\ViagemController;
@@ -31,4 +33,7 @@ Route::middleware(['web', 'auth:sanctum'])->group(function () {
         Route::patch('/{contaPagarMotorista}/pagar', [ContaPagarMotoristaController::class, 'marcarPago'])->name('pagar');
         Route::get('/{contaPagarMotorista}/recibo', [ContaPagarMotoristaController::class, 'recibo'])->name('recibo');
     });
+
+    Route::get('balancete', [BalanceteController::class, 'index'])->name('balancete');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
