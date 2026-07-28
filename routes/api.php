@@ -5,6 +5,7 @@ use MAC\Models\Abastecimento\Controllers\AbastecimentoController;
 use MAC\Models\Auth\Controllers\AuthController;
 use MAC\Models\Caminhao\Controllers\CaminhaoController;
 use MAC\Models\ContaPagarMotorista\Controllers\ContaPagarMotoristaController;
+use MAC\Models\DespesaCaminhao\Controllers\DespesaCaminhaoController;
 use MAC\Models\Motorista\Controllers\MotoristaController;
 use MAC\Models\Viagem\Controllers\ViagemController;
 
@@ -21,6 +22,7 @@ Route::middleware(['web', 'auth:sanctum'])->group(function () {
     Route::apiResource('caminhoes', CaminhaoController::class)->parameters(['caminhoes' => 'caminhao']);
     Route::apiResource('viagens', ViagemController::class)->parameters(['viagens' => 'viagem']);
     Route::apiResource('abastecimentos', AbastecimentoController::class)->parameters(['abastecimentos' => 'abastecimento']);
+    Route::apiResource('despesas', DespesaCaminhaoController::class)->parameters(['despesas' => 'despesaCaminhao']);
 
     Route::prefix('contas-pagar')->name('contas-pagar.')->group(function () {
         Route::get('/', [ContaPagarMotoristaController::class, 'index'])->name('index');

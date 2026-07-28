@@ -8,6 +8,7 @@ use MAC\Models\Abastecimento\Abastecimento;
 use MAC\Models\Caminhao\Caminhao;
 use MAC\Models\ContaPagarMotorista\ContaPagarMotorista;
 use MAC\Models\ContaPagarMotorista\Enums\StatusContaPagar;
+use MAC\Models\DespesaCaminhao\DespesaCaminhao;
 use MAC\Models\Motorista\Motorista;
 use MAC\Models\User\User;
 use MAC\Models\Viagem\Enums\StatusPagamento;
@@ -42,6 +43,8 @@ class DatabaseSeeder extends Seeder
                     ->for($caminhao)
                     ->create(['km' => $km, 'data' => now()->subDays((4 - $i) * 7)]);
             }
+
+            DespesaCaminhao::factory()->for($caminhao)->count(2)->create();
         }
 
         foreach ($motoristas as $motorista) {
