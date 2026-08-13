@@ -18,7 +18,7 @@ use MAC\Models\Viagem\Enums\StatusViagem;
 
 #[Fillable([
     'motorista_id', 'caminhao_id', 'data', 'origem', 'destino', 'contrato',
-    'peso', 'frete', 'entrada', 'valor_2', 'valor_3', 'pedagio', 'motivo',
+    'peso', 'frete', 'entrada', 'valor_2', 'valor_3', 'pedagio', 'valor_adicional', 'motivo',
     'status_viagem', 'status_pagamento', 'criado_por_id',
 ])]
 #[Hidden(['id', 'motorista_id', 'caminhao_id', 'criado_por_id'])]
@@ -41,6 +41,7 @@ class Viagem extends Model
             'valor_2' => 'decimal:2',
             'valor_3' => 'decimal:2',
             'pedagio' => 'decimal:2',
+            'valor_adicional' => 'decimal:2',
             'status_viagem' => StatusViagem::class,
             'status_pagamento' => StatusPagamento::class,
         ];

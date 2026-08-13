@@ -53,6 +53,48 @@ class ViagemTest extends TestCase
         $this->assertArrayNotHasKey('id', $response->json('data'));
     }
 
+    public function test_valor_adicional_is_stored_but_does_not_affect_restante_or_comissao(): void
+    {
+        $motorista = Motorista::factory()->create(['percentual_comissao' => 10]);
+        $caminhao = Caminhao::factory()->create();
+        $user = User::factory()->create();
+
+        $payload = $this->payload($motorista, $caminhao, [
+            'frete' => 3000,
+            'valor_adicional' => 400,
+            'status_viagem' => 'finalizada',
+        ]);
+
+        $response = $this->actingAs($user)->postJson('/api/viagens', $payload);
+
+        $response->assertCreated()
+            ->assertJsonPath('data.valor_adicional', 400)
+            ->assertJsonPath('data.restante', 1200);
+
+        $conta = ContaPagarMotorista::first();
+        $this->assertEquals(300.0, (float) $conta->valor_comissao);
+    }
+
+    public function test_creating_viagem_already_finalizada_generates_comissao_automatically(): void
+    {
+        $motorista = Motorista::factory()->create(['percentual_comissao' => 10]);
+        $caminhao = Caminhao::factory()->create();
+        $user = User::factory()->create();
+
+        $payload = $this->payload($motorista, $caminhao, ['frete' => 3000, 'status_viagem' => 'finalizada']);
+
+        $response = $this->actingAs($user)
+            ->postJson('/api/viagens', $payload);
+
+        $response->assertCreated()->assertJsonPath('data.status_viagem', 'finalizada');
+
+        $this->assertDatabaseCount('contas_pagar_motorista', 1);
+        $conta = ContaPagarMotorista::first();
+        $this->assertEquals(300.0, (float) $conta->valor_comissao);
+        $this->assertEquals($motorista->id, $conta->motorista_id);
+        $this->assertEquals($user->id, $conta->criado_por_id);
+    }
+
     public function test_can_list_viagens_with_filters(): void
     {
         $motorista = Motorista::factory()->create();

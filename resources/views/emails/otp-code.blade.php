@@ -11,7 +11,7 @@
                 <table width="480" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius: 14px; overflow: hidden;">
                     <tr>
                         <td style="background: linear-gradient(135deg, #0f2a4a 0%, #163a60 55%, #1d4a78 100%); padding: 28px 32px;">
-                            <span style="color:#ffffff; font-size: 20px; font-weight: bold;">Mackey Transportes</span>
+                            <span style="color:#ffffff; font-size: 20px; font-weight: bold;">VM Transportes</span>
                         </td>
                     </tr>
                     <tr>

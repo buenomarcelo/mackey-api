@@ -2,7 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "mackey/api",
     "type": "project",
-    "description": "Mackey API",
+    "description": "VM Transportes API",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {

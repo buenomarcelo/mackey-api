@@ -27,6 +27,7 @@ class ViagemResource extends JsonResource
             'valor_2' => (float) $this->valor_2,
             'valor_3' => (float) $this->valor_3,
             'pedagio' => (float) $this->pedagio,
+            'valor_adicional' => (float) $this->valor_adicional,
             'restante' => (float) $this->restante,
             'motivo' => $this->motivo,
             'status_viagem' => $this->status_viagem->value,

@@ -33,6 +33,7 @@ class ViagemFactory extends Factory
             'valor_2' => 0,
             'valor_3' => 0,
             'pedagio' => fake()->randomFloat(2, 50, 400),
+            'valor_adicional' => 0,
             'motivo' => null,
             'status_viagem' => StatusViagem::AGENDADA,
             'status_pagamento' => StatusPagamento::PENDENTE,

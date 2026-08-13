@@ -19,7 +19,7 @@ class OtpMail extends Mailable
     public function build(): self
     {
         return $this
-            ->subject('Seu código de verificação — Mackey')
+            ->subject('Seu código de verificação — VM Transportes')
             ->view('emails.otp-code')
             ->with([
                 'code' => $this->code,

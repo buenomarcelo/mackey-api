@@ -24,6 +24,7 @@ class StoreViagemRequest extends FormRequest
             'valor_2' => ['nullable', 'numeric', 'min:0'],
             'valor_3' => ['nullable', 'numeric', 'min:0'],
             'pedagio' => ['nullable', 'numeric', 'min:0'],
+            'valor_adicional' => ['nullable', 'numeric', 'min:0'],
             'motivo' => ['nullable', 'string'],
             'status_viagem' => ['nullable', new Enum(StatusViagem::class)],
             'status_pagamento' => ['nullable', new Enum(StatusPagamento::class)],

@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <h1>Recibo de Comissão — Mackey Transportes</h1>
+    <h1>Recibo de Comissão — VM Transportes</h1>
 
     <table>
         <tr><td class="label">Motorista</td><td>{{ $conta->motorista->nome }}</td></tr>
